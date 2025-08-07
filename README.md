@@ -1,3 +1,6 @@
+# INSTRUÇÕES DA ATIVIDADE!!!!!!!
+
+
 Chegou a hora de transformar aquele monte de tabelas criadas nos bimestres anteriores em uma aplicação de verdade. Essa é a virada de chave entre “estou estudando” e “estou construindo”.
 
 
