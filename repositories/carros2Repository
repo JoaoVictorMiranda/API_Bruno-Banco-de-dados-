@@ -1,0 +1,73 @@
+import { conection } from "../conection.js";
+
+export async function listarCarros2() {
+    const comando = `SELECT * FROM carros2;`;
+    const [registros] = await conection.query(comando);
+    return registros;
+}
+
+export async function inserirCarro2(dados) {
+    const comando = `
+        INSERT INTO carros2 
+            (id, Valor, Placa, modelo, ano_fabricacao, cor, ar_condicionado)
+        VALUES (?, ?, ?, ?, ?, ?, ?);
+    `;
+    const [info] = await conection.query(comando, [
+        dados.id,
+        dados.Valor,
+        dados.Placa,
+        dados.modelo,
+        dados.ano_fabricacao,
+        dados.cor,
+        dados.ar_condicionado,
+    ]);
+    return info.insertId;
+}
+
+export async function alterarCarro2(id, dados) {
+    const comando = `
+        UPDATE carros2
+        SET Valor = ?,
+            Placa = ?,
+            modelo = ?,
+            ano_fabricacao = ?,
+            cor = ?,
+            ar_condicionado = ?
+        WHERE id = ?;
+    `;
+    const [info] = await conection.query(comando, [
+        dados.Valor,
+        dados.Placa,
+        dados.modelo,
+        dados.ano_fabricacao,
+        dados.cor,
+        dados.ar_condicionado,
+        id,
+    ]);
+    return info.affectedRows;
+}
+
+export async function deletarCarro2(id) {
+    const comando = `DELETE FROM carros2 WHERE id = ?;`;
+    const [info] = await conection.query(comando, [id]);
+    return info.affectedRows;
+}
+
+export async function buscarCarro2PorId(id) {
+    const comando = `SELECT * FROM carros2 WHERE id = ?;`;
+    const [info] = await conection.query(comando, [id]);
+    return info;
+}
+
+export async function filtrarCarros2(filtro) {
+    const comando = `
+        SELECT * FROM carros2
+        WHERE Placa LIKE ? OR modelo LIKE ? OR cor LIKE ?;
+    `;
+    const [info] = await conection.query(comando, [
+        `%${filtro}%`,
+        `%${filtro}%`,
+        `%${filtro}%`
+    ]);
+    return info;
+}

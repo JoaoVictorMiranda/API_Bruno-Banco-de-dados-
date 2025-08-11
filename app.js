@@ -2,10 +2,12 @@ import express from 'express'
 import * as futRepo from './repositories/futebolRepository.js';
 import * as jogosRepo from './repositories/jogosRepository.js';
 import * as turmaRepo from './repositories/turmaRepository.js'
-import * as pizzaRepo from './repositories/pizzaRepository.js'
+import * as pizzaRepo from './repositories/pizzariaRepository.js'
 import * as musicRepo from './repositories/musicRepository.js'
-import * as medicamentoRepo from './repositories/medicamentoRepository.js'
+import * as medicamentoRepo from './repositories/remediosRepository.js'
 import * as livroRepo from './repositories/livroRepository.js'
+import * as carroRepo from './repositories/carrosRepository.js'
+import * as carros2Repo from './repositories/carros2Repository.js'
 
 const api = express();
 api.use(express.json()); // permite o uso de BODY
@@ -287,6 +289,86 @@ api.delete('/livro/:id', async (req, res) => {
 })
 
 
+//TABELA CARROS
+
+
+api.get('/carro', async (req, res) => {
+    let registros = await carroRepo.listarCarros();
+    res.send(registros);
+})
+
+api.get('/carro/id/:id', async (req, res) => {
+    let id = req.params.id;
+    let registro = await carroRepo.buscarCarroPorId(id);
+    res.send(registro);
+})
+
+api.get('/carro/filtro/:filtro', async (req, res) => {
+    let filtro = req.params.filtro;
+    let registros = await carroRepo.filtrarCarros(filtro);
+    res.send(registros);
+})
+
+api.post('/carro', async (req, res) => {
+    let dados = req.body;
+    let id = await carroRepo.inserirCarro(dados);
+    res.send({ novoId: id });
+})
+
+api.put('/carro', async (req, res) => {
+    let dados = req.body;
+    let id = req.query.id;
+
+    await carroRepo.alterarCarro(id, dados);
+    res.send();
+})
+
+api.delete('/carro/:id', async (req, res) => {
+    let id = req.params.id;
+    await carroRepo.deletarCarro(id);
+    res.send();
+})
+
+
+//CARROS 2
+
+
+api.get('/carros2', async (req, res) => {
+    let registros = await carros2Repo.listarCarros2();
+    res.send(registros);
+})
+
+api.get('/carros2/id/:id', async (req, res) => {
+    let id = req.params.id;
+    let registro = await carros2Repo.buscarCarro2PorId(id);
+    res.send(registro);
+})
+
+api.get('/carros2/filtro/:filtro', async (req, res) => {
+    let filtro = req.params.filtro;
+    let registros = await carros2Repo.filtrarCarros2(filtro);
+    res.send(registros);
+})
+
+api.post('/carros2', async (req, res) => {
+    let dados = req.body;
+    let id = await carros2Repo.inserirCarro2(dados);
+    res.send({ novoId: id });
+})
+
+api.put('/carros2', async (req, res) => {
+    let dados = req.body;
+    let id = req.query.id;
+
+    await carros2Repo.alterarCarro2(id, dados);
+    res.send();
+})
+
+api.delete('/carros2/:id', async (req, res) => {
+    let id = req.params.id;
+    await carros2Repo.deletarCarro2(id);
+    res.send();
+})
 
 
 api.listen(5010, () => console.log('API subiu com sucesso!'));
