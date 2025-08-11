@@ -63,6 +63,24 @@ export async function deletarTurma(id) {
 
 }
 
+export async function listaTurmaEspecifica(id) {
+    let comando = ` 
+
+    SELECT * FROM tb_turma
+    WHere id_turma = ?;
+    `
+    let [info] = await conection.query(comando, [id]);
+    return info;
+}
 
 
+export async function FiltrarTurmas(filtro) {
+    let comando = `
+        SELECT * FROM tb_turma
+        WHERE nm_turma LIKE ?
+    `
+    const [info] = await conection.query(comando, ['%' + filtro + '%'])
+    return info;
+
+}
 
