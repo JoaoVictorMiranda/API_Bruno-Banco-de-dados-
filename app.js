@@ -8,6 +8,7 @@ import * as medicamentoRepo from './repositories/remediosRepository.js'
 import * as livroRepo from './repositories/livroRepository.js'
 import * as carroRepo from './repositories/carrosRepository.js'
 import * as carros2Repo from './repositories/carros2Repository.js'
+import * as produtoRepo from './repositories/produtoRepository.js'
 
 const api = express();
 api.use(express.json()); // permite o uso de BODY
@@ -367,6 +368,49 @@ api.put('/carros2', async (req, res) => {
 api.delete('/carros2/:id', async (req, res) => {
     let id = req.params.id;
     await carros2Repo.deletarCarro2(id);
+    res.send();
+})
+
+
+
+
+
+//TABELA PRODUTOS
+
+api.get('/produtos', async (req, res) => {
+    let registros = await produtoRepo.listarProdutos();
+    res.send(registros);
+})
+
+api.get('/produtos/id/:id', async (req, res) => {
+    let id = req.params.id;
+    let registro = await produtoRepo.buscarProdutoPorId(id);
+    res.send(registro);
+})
+
+api.get('/produtos/filtro/:filtro', async (req, res) => {
+    let filtro = req.params.filtro;
+    let registros = await produtoRepo.filtrarProdutos(filtro);
+    res.send(registros);
+})
+
+api.post('/produtos', async (req, res) => {
+    let dados = req.body;
+    let id = await produtoRepo.inserirProduto(dados);
+    res.send({ novoId: id });
+})
+
+api.put('/produtos', async (req, res) => {
+    let dados = req.body;
+    let id = req.query.id;
+
+    await produtoRepo.alterarProduto(id, dados);
+    res.send();
+})
+
+api.delete('/produtos/:id', async (req, res) => {
+    let id = req.params.id;
+    await produtoRepo.deletarProduto(id);
     res.send();
 })
 
