@@ -1,4 +1,7 @@
 # INSTRUÇÕES DA ATIVIDADE!!!!!!!
+O QUE ME FALTA >>>  Terminar os gets feitos por fitro ou seja 
+GET           /nome_da_tabela/:id
+GET           /nome_da_tabela/filtros=??
 
 
 Chegou a hora de transformar aquele monte de tabelas criadas nos bimestres anteriores em uma aplicação de verdade. Essa é a virada de chave entre “estou estudando” e “estou construindo”.
@@ -58,3 +61,28 @@ Boa sorte, hihi
 #borapracima 
 #sanguenosoio 
 🔥
+
+
+
+
+# ATUALIZAÇÕES DAS NOVAS ATIVIDADES
+
+Falaa pessoal, baumm?
+
+Hora de finalizar aquele CRUD das 10 tabelas escolhidas no exercício anterior!
+
+
+🎯 OBJETIVO
+A missão de vocês é acrescentar os endpoints:
+PUT           /nome_da_tabela/:id
+DELETE     /nome_da_tabela/:id
+GET           /nome_da_tabela/:id
+GET           /nome_da_tabela/filtros=??
+
+
+Só arrasar!
+Bora pra cima!
+#Sanguenosoio
+🔥
+
+
